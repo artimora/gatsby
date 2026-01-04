@@ -1,59 +1,60 @@
 import { useEffect, useState } from "react";
 
-type TimeData = {
-	targetTime: number;
-	currentTime: number;
-	diffTime: number;
+type TimeParts = {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+  isPast: boolean;
 };
 
+const SECOND = 1000;
+const MINUTE = 60 * SECOND;
+const HOUR = 60 * MINUTE;
+const DAY = 24 * HOUR;
+
+function getTimeParts(target: Date): TimeParts {
+  const diff = target.getTime() - Date.now();
+  const remaining = Math.max(diff, 0);
+
+  return {
+    days: Math.floor(remaining / DAY),
+    hours: Math.floor((remaining % DAY) / HOUR),
+    minutes: Math.floor((remaining % HOUR) / MINUTE),
+    seconds: Math.floor((remaining % MINUTE) / SECOND),
+    isPast: diff <= 0,
+  };
+}
+
+function formatPart(value: number) {
+  return value.toString().padStart(2, "0");
+}
+
 export default function TimeDiff({ time }: { time: Date }) {
-	const [timeData, setTimeData] = useState<TimeData>({
-		targetTime: time.getUTCDate(),
-		currentTime: Date.now(),
-		diffTime: Math.floor(
-			(time.getUTCDate() - Date.now()) / (1000 * 60 * 60 * 24),
-		),
-	});
+  const [timeParts, setTimeParts] = useState<TimeParts>(() =>
+    getTimeParts(time)
+  );
 
-	useEffect(() => {
-		setInterval(() => {
-			const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+  useEffect(() => {
+    setTimeParts(getTimeParts(time));
 
-			const now = new Date(Date.now());
+    const intervalId = setInterval(() => {
+      setTimeParts(getTimeParts(time));
+    }, SECOND);
 
-			const targetTime = Date.UTC(
-				time.getFullYear(),
-				time.getMonth(),
-				time.getDate(),
-				time.getHours(),
-				time.getMinutes(),
-				time.getSeconds(),
-				time.getMilliseconds(),
-			);
+    return () => clearInterval(intervalId);
+  }, [time]);
 
-			const currentTime = Date.UTC(
-				now.getFullYear(),
-				now.getMonth(),
-				now.getDate(),
-				now.getHours(),
-				now.getMinutes(),
-				now.getSeconds(),
-				now.getMilliseconds(),
-			);
+  if (timeParts.isPast) {
+    return <p>reached</p>;
+  }
 
-			setTimeData({
-				targetTime,
-				currentTime,
-				diffTime: Math.floor((targetTime - currentTime) / _MS_PER_DAY),
-			});
-		}, 1);
-	}, []);
+  const countdown = [
+    `${timeParts.days}d`,
+    `${formatPart(timeParts.hours)}h`,
+    `${formatPart(timeParts.minutes)}m`,
+    `${formatPart(timeParts.seconds)}s`,
+  ].join(" ");
 
-	return (
-		<>
-			<p>targetTime: {timeData.targetTime}</p>
-			<p>currentTime: {timeData.currentTime}</p>
-			<p>diffTime: {timeData.diffTime}</p>
-		</>
-	);
+  return <span>{countdown}</span>;
 }

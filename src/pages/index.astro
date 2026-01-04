@@ -24,29 +24,47 @@ const props: PageProps = createProps({
     <main class="center">
       <h1>artimora - operation: gatsby</h1>
       <p>we got big plans :3 but they will take time, hence these countdowns</p>
-
       <ul>
         <li>
-          <p>start of phase two</p>
+          <p>socials</p>
           <ul>
             <li>
-              <TimeDiff time={tillPhaseTwoStart} client:only />
+              <a href="https://x.com/artimorastudios">twitter</a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/artimorastudios/">instagram</a>
+            </li>
+            <li>
+              <a href="https://github.com/artimora">github</a>
+            </li>
+            <li>
+              <a href="mailto:contact@artimora.dev">email</a>
+            </li>
+            <li>
+              <a href="https://modrinth.com/organization/artimora">modrinth</a>
             </li>
           </ul>
         </li>
         <li>
-          <p>start of phase three</p>
+          <p>countdowns</p>
           <ul>
             <li>
-              <TimeDiff time={tillPhaseThreeStart} client:only />
+              start of phase two: <TimeDiff
+                time={tillPhaseTwoStart}
+                client:only
+              />
             </li>
-          </ul>
-        </li>
-        <li>
-          <p>end of phase three</p>
-          <ul>
             <li>
-              <TimeDiff time={tillPhaseThreeEnd} client:only />
+              start of phase three: <TimeDiff
+                time={tillPhaseThreeStart}
+                client:only
+              />
+            </li>
+            <li>
+              end of phase three: <TimeDiff
+                time={tillPhaseThreeEnd}
+                client:only
+              />
             </li>
           </ul>
         </li>
