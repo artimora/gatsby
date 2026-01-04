@@ -26,47 +26,37 @@ const props: PageProps = createProps({
       <p>we got big plans :3 but they will take time, hence these countdowns</p>
       <ul>
         <li>
-          <p>socials</p>
+          <p>links</p>
           <ul>
             <li>
-              <a href="https://x.com/artimorastudios">twitter</a>
-            </li>
-            <li>
-              <a href="https://www.instagram.com/artimorastudios/">instagram</a>
-            </li>
-            <li>
-              <a href="https://github.com/artimora">github</a>
-            </li>
-            <li>
-              <a href="mailto:contact@artimora.dev">email</a>
-            </li>
-            <li>
-              <a href="https://modrinth.com/organization/artimora">modrinth</a>
+              <a href="https://artimora.dev/" target="_blank">homepage</a>
+              <li>
+                <a href="https://github.com/artimora/gatsby" target="_blank"
+                  >source</a
+                >
+              </li>
             </li>
           </ul>
-        </li>
-        <li>
-          <p>countdowns</p>
-          <ul>
-            <li>
-              start of phase two: <TimeDiff
-                time={tillPhaseTwoStart}
-                client:only
-              />
-            </li>
-            <li>
-              start of phase three: <TimeDiff
-                time={tillPhaseThreeStart}
-                client:only
-              />
-            </li>
-            <li>
-              end of phase three: <TimeDiff
-                time={tillPhaseThreeEnd}
-                client:only
-              />
-            </li>
-          </ul>
+          <li>
+            <p>countdowns</p>
+            <ul>
+              <li>
+                start of phase two: <b>
+                  <TimeDiff time={tillPhaseTwoStart} client:only />
+                </b>
+              </li>
+              <li>
+                start of phase three: <b>
+                  <TimeDiff time={tillPhaseThreeStart} client:only />
+                </b>
+              </li>
+              <li>
+                end of phase three: <b>
+                  <TimeDiff time={tillPhaseThreeEnd} client:only />
+                </b>
+              </li>
+            </ul>
+          </li>
         </li>
       </ul>
     </main>
