@@ -16,15 +16,6 @@ export const siteInfo: SiteInfo = {
   },
 };
 
-// unix timestamps in seconds (GMT/UTC+0)
-const MILLISECONDS_PER_SECOND = 1000;
-
-export const tillPhaseTwoStart = new Date(
-  1_776_297_600 * MILLISECONDS_PER_SECOND
-);
-export const tillPhaseThreeStart = new Date(
-  1_893_456_000 * MILLISECONDS_PER_SECOND
-);
-export const tillPhaseThreeEnd = new Date(
-  2_010_614_400 * MILLISECONDS_PER_SECOND
-);
+export const tillPhaseTwoStart = new Date("2026-05-31T00:00:00Z");
+export const tillPhaseThreeStart = new Date("2030-01-31T00:00:00Z");
+export const tillPhaseThreeEnd = new Date("2034-01-31T00:00:00Z");
