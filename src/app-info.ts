@@ -16,6 +16,6 @@ export const siteInfo: SiteInfo = {
   },
 };
 
-export const tillPhaseTwoStart = new Date("2026-05-31T00:00:00Z");
+export const tillPhaseTwoStart = new Date("2026-06-31T00:00:00Z");
 export const tillPhaseThreeStart = new Date("2030-01-31T00:00:00Z");
 export const tillPhaseThreeEnd = new Date("2034-01-31T00:00:00Z");
